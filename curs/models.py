@@ -10,7 +10,7 @@ class BaseCategory(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=250, null=False, unique=True)
+    name = models.CharField(max_length=250, null=False, unique=False)
     slug = models.SlugField(max_length=255, null=False)
     basecategory = models.ForeignKey(BaseCategory, on_delete=models.CASCADE, related_name='basecategory')
 
@@ -25,6 +25,7 @@ class Courses(models.Model):
     description = models.TextField()
     Duration = models.CharField(max_length=250, null=True)
     teacher = models.CharField(max_length=250, null=True)
+    category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='course')
 
     def __str__(self):
         return self.title
