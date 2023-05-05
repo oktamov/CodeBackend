@@ -14,9 +14,13 @@ from rest_framework.views import APIView
 #         return Response(serializer.data)
 
 class CategoryListView(ListCreateAPIView):
-    queryset = Category.objects.all()
+    lookup_field = 'slug'
+
     serializer_class = CategorySerializers
 
+    def get_queryset(self):
+        queryset = Category.objects.filter(basecategory__slug=self.kwargs[self.lookup_field])
+        return queryset
 
 class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Category

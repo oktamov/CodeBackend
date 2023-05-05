@@ -7,12 +7,13 @@ from courses import settings
 from curs.views import BaseCategoryListView, BaseCategoryDetail
 from curs.views.category import CategoryListView, CategoryDetailView
 
-urlpatterns = [
 
+urlpatterns = [
     path('base/', BaseCategoryListView.as_view(), name='base-list'),
     path('base/<slug:slug>/', BaseCategoryDetail.as_view(), name='base-detail'),
-    path('category/', CategoryListView.as_view(), name='category-list'),
-    path('category/<slug:slug>/', CategoryDetailView.as_view(), name='category-detail'),
+    path('base/<slug:slug>/category/', CategoryListView.as_view(), name='category-list'),
+    # path('category/', CategoryListView.as_view(), name='category-list'),
+    path('base/<slug:base_slug>/category/<slug:slug>/', CategoryDetailView.as_view(), name='category-detail'),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
