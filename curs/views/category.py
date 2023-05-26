@@ -22,6 +22,7 @@ class CategoryListView(ListCreateAPIView):
         queryset = Category.objects.filter(basecategory__slug=self.kwargs[self.lookup_field])
         return queryset
 
+
 class CategoryDetailView(RetrieveUpdateDestroyAPIView):
     queryset = Category
     serializer_class = CategorySerializers
